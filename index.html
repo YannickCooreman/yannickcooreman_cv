@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yannick Cooreman – Portfolio</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      background-color: #f4f4f4;
+    }
+    header {
+      text-align: center;
+      padding-bottom: 1rem;
+    }
+    nav {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    nav button {
+      margin: 0 0.5rem;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+    }
+    nav button:hover {
+      background-color: #0056b3;
+    }
+    .section {
+      display: none;
+    }
+    .active {
+      display: block;
+    }
+    .project {
+      background: white;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .project h2, .project h3 {
+      margin-top: 0;
+    }
+    footer {
+      text-align: center;
+      color: #777;
+      margin-top: 2rem;
+    }
+
+    .project-flex {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .project-title-full {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        text-align: left;
+    }
+
+    .project-text {
+        flex: 1;
+        min-width: 280px;
+        max-width: 800px;
+    }
+
+    .project-image {
+        flex-shrink: 0;
+        width: 300px;
+    }
+
+    .project-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        object-fit: cover;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Yannick Cooreman</h1>
+    <p>Master Information Systems & Signal Processing</p>
+  </header>
+
+  <nav>
+    <button onclick="showSection('home')">Home</button>
+    <button onclick="showSection('personal')">Personal Projects</button>
+    <button onclick="showSection('college')">College Projects</button>
+  </nav>
+
+  <!-- Home/About Section -->
+  <div id="home" class="section active">
+    <h2>About Me</h2>
+    <p>Hi! I'm Yannick Cooreman, a master's student in Information Systems and Signal Processing at KU Leuven. I enjoy building tools that combine system design with signal analysis, as well as developing software for real-time control applications.</p>
+    <p>This site showcases both my personal projects and those completed during my studies. Relevant code for each project can be found on the linked GitHub pages. Some projects also include interactive implementations that utilize your device’s audio and video capabilities directly in the browser.</p>
+  </div>
+
+  <!-- Personal Projects Section -->
+  <div id="personal" class="section">
+    <h2>Personal Projects</h2>
+
+    <div class="project">
+      <h3>Face Recognition with Signal Preprocessing</h3>
+      <p>Applies filtering and FFT to image data before feeding it into a convolutional neural network for face recognition. Built using OpenCV, with a plan to integrate this into a browser-based demo.</p>
+      <a href="#">(GitHub link coming soon)</a>
+    </div>
+
+    <div class="project">
+      <h3>Edge Detection + Object Counting App</h3>
+      <p>Performs edge detection using filters like Sobel and Laplacian to identify and count distinct objects in images. Includes live webcam feed processing or image upload support.</p>
+      <a href="#">(GitHub link coming soon)</a>
+    </div>
+  </div>
+
+  <!-- College Projects Section -->
+  <div id="college" class="section">
+    <h2>College Projects</h2>
+
+    <div class="project">
+      <h3>EEG-Guided Dual-Source Audio Processing</h3>
+      <p>Real-time dual-source audio processing system with wideband DOA estimation. Incorporates a neural network that analyzes EEG signals to identify the attended audio source. Includes GSC-based noise reduction in the frequency domain.</p>
+      <a href="#">(GitHub or report link)</a>
+    </div>
+
+    <div class="project">
+      <h3>Real-Time Omnidirectional Robot Control</h3>
+      <p>Designed and implemented a real-time control system for an omnidirectional robot using mecanum wheels. Includes multi-threaded communication and a custom touchscreen GUI interface.</p>
+      <a href="#">(GitHub or report link)</a>
+    </div>
+
+    <div class="project">
+        <h3 class="project-title-full">
+            Upcoming Master Thesis – Design and implementation of a radio probe for spectrum sensing with high altitude balloons
+        </h3>
+        <div class="project-flex">
+            <div class="project-text">
+                <p>
+                    The goal of this thesis is to continue the development of the Stratosense project. <br>
+                    Stratosense, which started in 2019, aims to perform spectrum sensing tasks at high altitude using helium balloons. <br>
+                    Spectrum sensing consists of detecting and recording radio signals across multiple frequency bands, enabling statistical analysis for each channel. <br>
+                    Applications include detecting and locating radio transmitters, identifying anomalous transmissions, gathering occupancy statistics, and capturing signals of potential extra-terrestrial origin. <br>
+                    The technical focus lies in implementing spectrum sensing algorithms on a software-defined radio probe (USRP E320 or E312). <br>
+                    Students may explore components such as energy- or correlation-based transmission detection, data compression, and RF signal processing. <br>
+                    In the second phase, real-world measurements will be collected and analyzed—both on the ground and during aerial tests using drones or helium balloons.
+                </p>
+            </div>
+            <div class="project-image">
+            <img src="https://via.placeholder.com/300x400" alt="Stratosense project image" />
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Yannick Cooreman. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function showSection(id) {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
