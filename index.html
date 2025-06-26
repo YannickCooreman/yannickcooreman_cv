@@ -4,20 +4,47 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Yannick Cooreman – Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 2rem;
-      background-color: #f4f4f4;
+    * {
+      box-sizing: border-box;
     }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background-color: #f4f4f4;
+      color: #222;
+      line-height: 1.6;
+    }
+
     header {
       text-align: center;
-      padding-bottom: 1rem;
+      padding: 2rem 1rem 1rem;
+      background-color: #ffffff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
+
+    header h1 {
+      margin-bottom: 0.25rem;
+      font-size: 2rem;
+    }
+
+    header p {
+      color: #555;
+      font-size: 1rem;
+    }
+
     nav {
       text-align: center;
-      margin-bottom: 2rem;
+      background-color: #ffffff;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
+
     nav button {
       margin: 0 0.5rem;
       padding: 0.5rem 1rem;
@@ -27,63 +54,115 @@
       cursor: pointer;
       background-color: #007bff;
       color: white;
+      transition: background-color 0.3s, transform 0.2s;
     }
+
     nav button:hover {
       background-color: #0056b3;
+      transform: translateY(-2px);
     }
+
+    nav button.active-btn {
+      background-color: #0056b3;
+    }
+
     .section {
       display: none;
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      opacity: 0;
+      transition: opacity 0.3s ease-in;
     }
-    .active {
+
+    .section.active {
       display: block;
+      opacity: 1;
     }
+
+    h2 {
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
     .project {
       background: white;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
-    .project h2, .project h3 {
+
+    .project h3, .project h2 {
       margin-top: 0;
-    }
-    footer {
-      text-align: center;
-      color: #777;
-      margin-top: 2rem;
     }
 
     .project-flex {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      align-items: flex-start;
     }
 
     .project-title-full {
-        font-size: 1.2rem;
-        margin-bottom: 1rem;
-        text-align: left;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
     }
 
     .project-text {
-        flex: 1;
-        min-width: 280px;
-        max-width: 800px;
+      flex: 1;
+      min-width: 280px;
+      max-width: 600px;
     }
 
     .project-image {
-        flex-shrink: 0;
-        width: 300px;
+      flex: 1;
+      min-width: 300px;
+      max-width: 400px;
     }
 
     .project-image img {
-        width: 100%;
-        height: auto;
-        border-radius: 8px;
-        object-fit: cover;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      object-fit: cover;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
+    footer {
+      text-align: center;
+      color: #777;
+      font-size: 0.9rem;
+      margin: 3rem 1rem 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .project-flex {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .project-image {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 500px) {
+      nav button {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.8rem;
+        margin: 0.2rem;
+      }
+
+      header h1 {
+        font-size: 1.6rem;
+      }
+
+      header p {
+        font-size: 0.9rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -94,19 +173,17 @@
   </header>
 
   <nav>
-    <button onclick="showSection('home')">Home</button>
-    <button onclick="showSection('personal')">Personal Projects</button>
-    <button onclick="showSection('college')">College Projects</button>
+    <button onclick="showSection('home', this)" class="active-btn">Home</button>
+    <button onclick="showSection('personal', this)">Personal Projects</button>
+    <button onclick="showSection('college', this)">College Projects</button>
   </nav>
 
-  <!-- Home/About Section -->
   <div id="home" class="section active">
     <h2>About Me</h2>
     <p>Hi! I'm Yannick Cooreman, a master's student in Information Systems and Signal Processing at KU Leuven. I enjoy building tools that combine system design with signal analysis, as well as developing software for real-time control applications.</p>
     <p>This site showcases both my personal projects and those completed during my studies. Relevant code for each project can be found on the linked GitHub pages. Some projects also include interactive implementations that utilize your device’s audio and video capabilities directly in the browser.</p>
   </div>
 
-  <!-- Personal Projects Section -->
   <div id="personal" class="section">
     <h2>Personal Projects</h2>
 
@@ -123,7 +200,6 @@
     </div>
   </div>
 
-  <!-- College Projects Section -->
   <div id="college" class="section">
     <h2>College Projects</h2>
 
@@ -140,25 +216,23 @@
     </div>
 
     <div class="project">
-        <h3 class="project-title-full">
-            Upcoming Master Thesis – Design and implementation of a radio probe for spectrum sensing with high altitude balloons
-        </h3>
-        <div class="project-flex">
-            <div class="project-text">
-                <p>
-                    The goal of this thesis is to continue the development of the Stratosense project. <br>
-                    Stratosense, which started in 2019, aims to perform spectrum sensing tasks at high altitude using helium balloons. <br>
-                    Spectrum sensing consists of detecting and recording radio signals across multiple frequency bands, enabling statistical analysis for each channel. <br>
-                    Applications include detecting and locating radio transmitters, identifying anomalous transmissions, gathering occupancy statistics, and capturing signals of potential extra-terrestrial origin. <br>
-                    The technical focus lies in implementing spectrum sensing algorithms on a software-defined radio probe (USRP E320 or E312). <br>
-                    Students may explore components such as energy- or correlation-based transmission detection, data compression, and RF signal processing. <br>
-                    In the second phase, real-world measurements will be collected and analyzed—both on the ground and during aerial tests using drones or helium balloons.
-                </p>
-            </div>
-            <div class="project-image">
-            <img src="https://via.placeholder.com/300x400" alt="Stratosense project image" />
-            </div>
+      <h3 class="project-title-full">Upcoming Master Thesis – Design and implementation of a radio probe for spectrum sensing with high altitude balloons</h3>
+      <div class="project-flex">
+        <div class="project-text">
+          <p>
+            The goal of this thesis is to continue the development of the Stratosense project. <br>
+            Stratosense, which started in 2019, aims to perform spectrum sensing tasks at high altitude using helium balloons. <br>
+            Spectrum sensing consists of detecting and recording radio signals across multiple frequency bands, enabling statistical analysis for each channel. <br>
+            Applications include detecting and locating radio transmitters, identifying anomalous transmissions, gathering occupancy statistics, and capturing signals of potential extra-terrestrial origin. <br>
+            The technical focus lies in implementing spectrum sensing algorithms on a software-defined radio probe (USRP E320 or E312). <br>
+            Students may explore components such as energy- or correlation-based transmission detection, data compression, and RF signal processing. <br>
+            In the second phase, real-world measurements will be collected and analyzed—both on the ground and during aerial tests using drones or helium balloons.
+          </p>
         </div>
+        <div class="project-image">
+          <img src="images/radioprobe_placeholder.webp" alt="Stratosense project image" />
+        </div>
+      </div>
     </div>
   </div>
 
@@ -167,12 +241,15 @@
   </footer>
 
   <script>
-    function showSection(id) {
+    function showSection(id, btn) {
       const sections = document.querySelectorAll('.section');
-      sections.forEach(section => {
-        section.classList.remove('active');
-      });
+      sections.forEach(section => section.classList.remove('active'));
+
       document.getElementById(id).classList.add('active');
+
+      const buttons = document.querySelectorAll('nav button');
+      buttons.forEach(button => button.classList.remove('active-btn'));
+      btn.classList.add('active-btn');
     }
   </script>
 
