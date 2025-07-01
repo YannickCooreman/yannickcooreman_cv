@@ -5,9 +5,81 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Yannick Cooreman – Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Lora:wght@400;700&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
+    }
+
+    /* Starter Page */
+    #starter-page {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('images/waveform_indexpage.jpg') no-repeat center center;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      z-index: 9999;
+      cursor: pointer;
+      opacity: 1;
+      transition: opacity 0.4s ease;
+
+      border: 20px solid white;
+      border-radius: 40px;
+      box-sizing: border-box;
+      overflow: hidden;
+
+      /* Optional: soft glow on inner edges */
+      box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.2), 0 0 10px rgba(255, 255, 255, 0.1);
+
+    }
+
+    #starter-page.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #starter-page .circle {
+        background-image: radial-gradient(
+            circle,
+            rgba(17, 93, 208, 0.85) 60%,  /* center */
+            rgba(17, 93, 208, 0.45) 85%,   /* mid edge */
+            rgba(17, 93, 208, 0) 100%     /* outer edge fully transparent */
+        );
+        border-radius: 50%;
+        width: 475px;
+        height: 475px;
+        margin-left: 10%;
+        margin-top: 10%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 1rem;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+        font-family: 'Lora', serif;
+        color: white;
+        font-size: 2.4rem;
+        line-height: 1.8;
+    }
+
+
+    /* Main Page */
+
+
+    .fade-in {
+        animation: fadeIn 0.8s ease forwards;
+        opacity: 0; /* Start hidden, fades to full */
+    }
+
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+        }
     }
 
     body {
@@ -18,22 +90,6 @@
       line-height: 1.6;
     }
 
-    header {
-      text-align: center;
-      padding: 2rem 1rem 1rem;
-      background-color: #ffffff;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    }
-
-    header h1 {
-      margin-bottom: 0.25rem;
-      font-size: 2rem;
-    }
-
-    header p {
-      color: #555;
-      font-size: 1rem;
-    }
 
     nav {
       text-align: center;
@@ -64,6 +120,42 @@
 
     nav button.active-btn {
       background-color: #0056b3;
+    }
+
+
+    .header-flex {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+        padding: 2rem 1rem;
+        text-align: left;
+    }
+
+    .header-flex img {
+        width: 140px;
+        height: 180px;
+        border-radius: 40%;
+        object-fit: cover;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .header-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .header-text h1 {
+        margin: 0;
+        font-size: 2rem;
+    }
+
+    .header-text p {
+        margin: 0.25rem 0 0;
+        font-size: 1.1rem;
+        color: #555;
     }
 
     .section {
@@ -130,6 +222,15 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
+    .skills-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .skills-list li {
+      margin-bottom: 0.5rem;
+    }
+
     footer {
       text-align: center;
       color: #777;
@@ -146,105 +247,154 @@
       .project-image {
         width: 100%;
       }
-    }
 
-    @media (max-width: 500px) {
-      nav button {
-        font-size: 0.9rem;
-        padding: 0.5rem 0.8rem;
-        margin: 0.2rem;
-      }
-
-      header h1 {
-        font-size: 1.6rem;
-      }
-
-      header p {
-        font-size: 0.9rem;
+      #starter-page .circle {
+        width: 80vw;
+        height: 80vw;
+        font-size: 1rem;
       }
     }
+
+    @media (max-width: 600px) {
+        .header-flex {
+            flex-direction: column;
+            text-align: center;
+        }
+    }
+
+    html {
+      overflow-y: scroll;
+    }
+
+
+
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Yannick Cooreman</h1>
-    <p>Master Information Systems & Signal Processing</p>
-  </header>
-
-  <nav>
-    <button onclick="showSection('home', this)" class="active-btn">Home</button>
-    <button onclick="showSection('personal', this)">Personal Projects</button>
-    <button onclick="showSection('college', this)">College Projects</button>
-  </nav>
-
-  <div id="home" class="section active">
-    <h2>About Me</h2>
-    <p>Hi! I'm Yannick Cooreman, a master's student in Information Systems and Signal Processing at KU Leuven. I enjoy building tools that combine system design with signal analysis, as well as developing software for real-time control applications.</p>
-    <p>This site showcases both my personal projects and those completed during my studies. Relevant code for each project can be found on the linked GitHub pages. Some projects also include interactive implementations that utilize your device’s audio and video capabilities directly in the browser.</p>
-  </div>
-
-  <div id="personal" class="section">
-    <h2>Personal Projects</h2>
-
-    <div class="project">
-      <h3>Face Recognition with Signal Preprocessing</h3>
-      <p>Applies filtering and FFT to image data before feeding it into a convolutional neural network for face recognition. Built using OpenCV, with a plan to integrate this into a browser-based demo.</p>
-      <a href="#">(GitHub link coming soon)</a>
-    </div>
-
-    <div class="project">
-      <h3>Edge Detection + Object Counting App</h3>
-      <p>Performs edge detection using filters like Sobel and Laplacian to identify and count distinct objects in images. Includes live webcam feed processing or image upload support.</p>
-      <a href="#">(GitHub link coming soon)</a>
+  <!-- Starter Page -->
+  <div id="starter-page">
+    <div class="circle">
+      <p>Personal page of<br><strong>Yannick Cooreman</strong></p>
     </div>
   </div>
 
-  <div id="college" class="section">
-    <h2>College Projects</h2>
-
-    <div class="project">
-      <h3>EEG-Guided Dual-Source Audio Processing</h3>
-      <p>Real-time dual-source audio processing system with wideband DOA estimation. Incorporates a neural network that analyzes EEG signals to identify the attended audio source. Includes GSC-based noise reduction in the frequency domain.</p>
-      <a href="#">(GitHub or report link)</a>
-    </div>
-
-    <div class="project">
-      <h3>Real-Time Omnidirectional Robot Control</h3>
-      <p>Designed and implemented a real-time control system for an omnidirectional robot using mecanum wheels. Includes multi-threaded communication and a custom touchscreen GUI interface.</p>
-      <a href="#">(GitHub or report link)</a>
-    </div>
-
-    <div class="project">
-      <h3 class="project-title-full">Upcoming Master Thesis – Design and implementation of a radio probe for spectrum sensing with high altitude balloons</h3>
-      <div class="project-flex">
-        <div class="project-text">
-          <p>
-            The goal of this thesis is to continue the development of the Stratosense project. <br>
-            Stratosense, which started in 2019, aims to perform spectrum sensing tasks at high altitude using helium balloons. <br>
-            Spectrum sensing consists of detecting and recording radio signals across multiple frequency bands, enabling statistical analysis for each channel. <br>
-            Applications include detecting and locating radio transmitters, identifying anomalous transmissions, gathering occupancy statistics, and capturing signals of potential extra-terrestrial origin. <br>
-            The technical focus lies in implementing spectrum sensing algorithms on a software-defined radio probe (USRP E320 or E312). <br>
-            Students may explore components such as energy- or correlation-based transmission detection, data compression, and RF signal processing. <br>
-            In the second phase, real-world measurements will be collected and analyzed—both on the ground and during aerial tests using drones or helium balloons.
-          </p>
+  <!-- Main Site Content -->
+  <div id="main-content" style="display: none;">
+    <header>
+      <div class="header-flex">
+        <img src="images/profile_picture_draft.jpg" alt="Profile Picture" />
+        <div class="header-text">
+          <h1>Yannick Cooreman</h1>
+          <p>Master Information Systems & Signal Processing</p>
         </div>
-        <div class="project-image">
-          <img src="images/radioprobe_placeholder.webp" alt="Stratosense project image" />
+      </div>
+    </header>
+
+    <nav>
+      <button onclick="showSection('home', this)" class="active-btn">Home</button>
+      <button onclick="showSection('personal', this)">Personal Projects</button>
+      <button onclick="showSection('college', this)">College Projects</button>
+      <button onclick="showSection('contact', this)">Contact</button>
+    </nav>
+
+    <div id="home" class="section active">
+      <h2>About Me</h2>
+      <p>Hi! I'm Yannick Cooreman, a master's student in Information Systems and Signal Processing at KU Leuven. I enjoy building tools that combine system design with signal analysis, as well as developing software for real-time control applications.</p>
+      <p>This site showcases both my personal projects and those completed during my studies. Relevant code for each project can be found on the linked GitHub pages. Some projects also include interactive implementations that utilize your device’s audio and video capabilities directly in the browser.</p>
+
+      <h2>Programming Skills</h2>
+      <ul class="skills-list">
+        <li><strong>HTML/CSS:</strong> Intermediate</li>
+        <li><strong>C:</strong> Intermediate</li>
+        <li><strong>Python:</strong> Advanced</li>
+        <li><strong>MATLAB:</strong> Advanced</li>
+        <li><strong>JavaScript:</strong> Basic</li>
+      </ul>
+    </div>
+
+    <div id="personal" class="section">
+      <h2>Personal Projects</h2>
+      <div class="project">
+        <h3>Face Recognition with Signal Preprocessing</h3>
+        <p>Applies filtering and FFT to image data before feeding it into a convolutional neural network for face recognition. Built using OpenCV, with a plan to integrate this into a browser-based demo.</p>
+        <a href="#">(GitHub link coming soon)</a>
+      </div>
+      <div class="project">
+        <h3>Edge Detection + Object Counting App</h3>
+        <p>Performs edge detection using filters like Sobel and Laplacian to identify and count distinct objects in images. Includes live webcam feed processing or image upload support.</p>
+        <a href="#">(GitHub link coming soon)</a>
+      </div>
+    </div>
+
+    <div id="college" class="section">
+      <h2>College Projects</h2>
+      <div class="project">
+        <h3>EEG-Guided Dual-Source Audio Processing</h3>
+        <p>Real-time dual-source audio processing system with wideband DOA estimation. Incorporates a neural network that analyzes EEG signals to identify the attended audio source. Includes GSC-based noise reduction in the frequency domain.</p>
+        <a href="#">(GitHub or report link)</a>
+      </div>
+      <div class="project">
+        <h3>Real-Time Omnidirectional Robot Control</h3>
+        <p>Designed and implemented a real-time control system for an omnidirectional robot using mecanum wheels. Includes multi-threaded communication and a custom touchscreen GUI interface.</p>
+        <a href="#">(GitHub or report link)</a>
+      </div>
+      <div class="project">
+        <h3 class="project-title-full">Upcoming Master Thesis – Design and implementation of a radio probe for spectrum sensing with high altitude balloons</h3>
+        <div class="project-flex">
+          <div class="project-text">
+            <p>
+              The goal of this thesis is to continue the development of the Stratosense project. <br>
+              Stratosense, which started in 2019, aims to perform spectrum sensing tasks at high altitude using helium balloons. <br>
+              Spectrum sensing consists of detecting and recording radio signals across multiple frequency bands, enabling statistical analysis for each channel. <br>
+              Applications include detecting and locating radio transmitters, identifying anomalous transmissions, gathering occupancy statistics, and capturing signals of potential extra-terrestrial origin. <br>
+              The technical focus lies in implementing spectrum sensing algorithms on a software-defined radio probe (USRP E320 or E312). <br>
+              Students may explore components such as energy- or correlation-based transmission detection, data compression, and RF signal processing. <br>
+              In the second phase, real-world measurements will be collected and analyzed—both on the ground and during aerial tests using drones or helium balloons.
+            </p>
+          </div>
+          <div class="project-image">
+            <img src="images/radioprobe_placeholder.webp" alt="Stratosense project image" />
+          </div>
         </div>
       </div>
     </div>
+
+    <div id="contact" class="section">
+      <h2>Contact</h2>
+      <p><strong>Email:</strong> <a href="mailto:yannick.cooreman@gmail.com">yannick.cooreman@gmail.com</a></p>
+      <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/yourname" target="_blank">not yet implemented</a></p>
+      <p><strong>GitHub:</strong> <a href="https://github.com/YannickCooreman" target="_blank">github.com/YannickCooreman</a></p>
+    </div>
+
+    <footer>
+      <p>© 2025 Yannick Cooreman. All rights reserved.</p>
+    </footer>
   </div>
 
-  <footer>
-    <p>© 2025 Yannick Cooreman. All rights reserved.</p>
-  </footer>
-
   <script>
+    const starter = document.getElementById("starter-page");
+    const mainContent = document.getElementById("main-content");
+
+    function hideStarter() {
+      if (!starter.classList.contains("fade-out")) {
+        starter.classList.add("fade-out");
+        setTimeout(() => {
+            starter.style.display = "none";
+            mainContent.style.display = "block";
+            mainContent.classList.add("fade-in");
+        }, 400);
+      }
+    }
+
+    // Hide on click/tap
+    starter.addEventListener("click", hideStarter);
+    // Auto-hide after x seconds
+    setTimeout(hideStarter, 2000);
+
     function showSection(id, btn) {
       const sections = document.querySelectorAll('.section');
       sections.forEach(section => section.classList.remove('active'));
-
       document.getElementById(id).classList.add('active');
 
       const buttons = document.querySelectorAll('nav button');
