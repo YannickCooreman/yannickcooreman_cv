@@ -35,7 +35,6 @@
 
       /* Optional: soft glow on inner edges */
       box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.2), 0 0 10px rgba(255, 255, 255, 0.1);
-
     }
 
     #starter-page.fade-out {
@@ -67,9 +66,7 @@
         line-height: 1.8;
     }
 
-
     /* Main Page */
-
 
     .fade-in {
         animation: fadeIn 0.8s ease forwards;
@@ -90,7 +87,6 @@
       line-height: 1.6;
     }
 
-
     nav {
       text-align: center;
       background-color: #ffffff;
@@ -99,6 +95,18 @@
       top: 0;
       z-index: 100;
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    #nav-toggle {
+        display: none;
+        font-size: 1.5rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #007bff;
+
+        text-align: left;
+        padding-left: 0.1rem;
     }
 
     nav button {
@@ -121,7 +129,6 @@
     nav button.active-btn {
       background-color: #0056b3;
     }
-
 
     .header-flex {
         display: flex;
@@ -247,27 +254,34 @@
         #starter-page .circle {
             width: 80vw;
             height: 80vw;
-            font-size: 1.1rem;
+            font-size: 1rem;
             margin-left: 0;
             padding: 1.5rem;
         }
-    }
 
-    @media (max-width: 768px) {
-      .project-flex {
-        flex-direction: column;
-        gap: 1.5rem;
-      }
+        .project-flex {
+            flex-direction: column;
+            gap: 1.5rem;
+        }
 
-      .project-image {
-        width: 100%;
-      }
+        .project-image {
+            width: 100%;
+        }
 
-      #starter-page .circle {
-        width: 80vw;
-        height: 80vw;
-        font-size: 1rem;
-      }
+        #nav-toggle {
+            display: inline-block;
+        }
+
+        nav button:not(#nav-toggle) {
+            display: none;
+            width: 60%;
+            margin: 0.3rem auto;
+        }
+
+        nav.expanded button:not(#nav-toggle) {
+            display: block;
+        }
+
     }
 
     @media (max-width: 600px) {
@@ -277,17 +291,17 @@
             border-radius: 10px;
         }
 
-
         .header-flex {
             flex-direction: column;
             text-align: center;
         }
 
-          nav button {
+        nav button {
             display: block;
             width: 60%;
             margin: 0.25rem auto;
         }
+
         nav {
             text-align: center;
         }
@@ -296,16 +310,11 @@
             flex-direction: column;
             gap: 1rem;
         }
-
-
     }
 
     html {
       overflow-y: scroll;
     }
-
-
-
   </style>
 </head>
 <body>
@@ -330,10 +339,11 @@
     </header>
 
     <nav>
-      <button onclick="showSection('home', this)" class="active-btn">Home</button>
-      <button onclick="showSection('personal', this)">Personal Projects</button>
-      <button onclick="showSection('college', this)">College Projects</button>
-      <button onclick="showSection('contact', this)">Contact</button>
+        <button id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">⋮☰</button>
+        <button onclick="showSection('home', this)" class="active-btn">Home</button>
+        <button onclick="showSection('personal', this)">Personal Projects</button>
+        <button onclick="showSection('college', this)">College Projects</button>
+        <button onclick="showSection('contact', this)">Contact</button>
     </nav>
 
     <div id="home" class="section active">
@@ -413,21 +423,21 @@
   <script>
     const starter = document.getElementById("starter-page");
     const mainContent = document.getElementById("main-content");
+    const nav = document.querySelector('nav');
+    const toggleBtn = document.getElementById('nav-toggle');
 
     function hideStarter() {
       if (!starter.classList.contains("fade-out")) {
         starter.classList.add("fade-out");
         setTimeout(() => {
-            starter.style.display = "none";
-            mainContent.style.display = "block";
-            mainContent.classList.add("fade-in");
+          starter.style.display = "none";
+          mainContent.style.display = "block";
+          mainContent.classList.add("fade-in");
         }, 400);
       }
     }
 
-    // Hide on click/tap
     starter.addEventListener("click", hideStarter);
-    // Auto-hide after x seconds
     setTimeout(hideStarter, 5000);
 
     function showSection(id, btn) {
@@ -439,6 +449,13 @@
       buttons.forEach(button => button.classList.remove('active-btn'));
       btn.classList.add('active-btn');
     }
+
+    // Attach hamburger toggle event once on page load
+    toggleBtn.addEventListener('click', () => {
+      const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      toggleBtn.setAttribute('aria-expanded', !expanded);
+      nav.classList.toggle('expanded');
+    });
   </script>
 
 </body>
